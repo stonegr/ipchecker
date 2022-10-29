@@ -83,6 +83,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.release.outputs.upload_url }}
-          asset_path: ./dist/${{ Name }}-${{ matrix.os }}.tar.gz
-          asset_name: ${{ Name }}-${{ matrix.os }}.tar.gz
+          asset_path: ./dist/${{ env.Name }}-${{ matrix.os }}.tar.gz
+          asset_name: ${{ env.Name }}-${{ matrix.os }}.tar.gz
           asset_content_type: application/gzip
