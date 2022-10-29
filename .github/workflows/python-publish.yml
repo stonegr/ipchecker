@@ -1,4 +1,4 @@
-name: Release ipchecker_task1
+name: Release ipchecker_task
 
 on: [push]
 # on: 
