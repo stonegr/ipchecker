@@ -66,14 +66,14 @@ jobs:
       
       - name: Build
         run: |
-          pyinstaller -F main.py -n $Name
+          pyinstaller -F main.py -n ${{ env.Name }}
 
       - name: Package
         working-directory: ./dist
         run: |
           pwd
           ls -h
-          tar -zcvf $Name-${{ matrix.os }}.tar.gz *
+          tar -zcvf ${{ env.Name }}-${{ matrix.os }}.tar.gz *
           ls -h
 
       - name: Upload assets
