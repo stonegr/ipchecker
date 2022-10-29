@@ -1,4 +1,4 @@
-name: Release ipchecker_task
+name: Release Python Project
 
 on: [push]
 # on: 
@@ -22,13 +22,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.run_id }}
-          release_name: ${{ github.run_id }}
+          tag_name: ${{ github.rf }}
+          release_name: ${{ github.rf }}
           draft: false
           prerelease: false
       
   study:
-    name: Build ipchecker
+    name: Build environment
     runs-on: ${{ matrix.os }}
     needs: release
     strategy:
@@ -53,17 +53,15 @@ jobs:
       - name: get code
         uses: actions/checkout@v3
         # with:
-        #   path: ipchecker_linux
+        #   path: dirname
 
       - name: Install dependencies
-        # working-directory: ipchecker_linux
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install pyinstaller
       
       - name: Build
-        # working-directory: ipchecker_linux
         run: |
           pyinstaller -F main.py -n ipchecker
 
