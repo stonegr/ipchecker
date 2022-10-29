@@ -1,4 +1,4 @@
-name: Release Python Project1
+name: Release Python Project
 
 on: [push]
 # on: 
