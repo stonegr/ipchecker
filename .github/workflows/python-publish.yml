@@ -8,6 +8,9 @@ on: [push]
 
 #   workflow_dispatch:
 
+env:
+  Name: ipchecker
+
 jobs:
   release:
     name: Create Release
@@ -63,14 +66,14 @@ jobs:
       
       - name: Build
         run: |
-          pyinstaller -F main.py -n ipchecker
+          pyinstaller -F main.py -n $Name
 
       - name: Package
         working-directory: ./dist
         run: |
           pwd
           ls -h
-          tar -zcvf ipchecker-${{ matrix.os }}.tar.gz *
+          tar -zcvf $Name-${{ matrix.os }}.tar.gz *
           ls -h
 
       - name: Upload assets
@@ -80,6 +83,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.release.outputs.upload_url }}
-          asset_path: ./dist/ipchecker-${{ matrix.os }}.tar.gz
-          asset_name: ipchecker-${{ matrix.os }}.tar.gz
+          asset_path: ./dist/$Name-${{ matrix.os }}.tar.gz
+          asset_name: $Name-${{ matrix.os }}.tar.gz
           asset_content_type: application/gzip
