@@ -29,10 +29,20 @@ def index():
         if not args.get("host"):
             return "", 404
         else:
-            _c = {
-                "host": args.get("host"),
-                "port": args.get("port", 80),
-            }
+            if is_ip(args.get("host")):
+                _c = {
+                    "host": args.get("host"),
+                    "port": args.get("port", 80),
+                }
+            else:
+                if is_ip(getIP(args.get("host"))):
+                    _c = {
+                        "host": getIP(args.get("host")),
+                        "port": args.get("port", 80),
+                    }
+                else:
+                    return "", 404
+
             _result = check_tcp_port(_c)
     # print(_result)
     # return _result

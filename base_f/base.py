@@ -40,5 +40,24 @@ def get_config(path: str):
     return _c
 
 
+# 获取域名ip
+def getIP(domain):
+    try:
+        myaddr = socket.getaddrinfo(domain, "http")
+        return myaddr[0][4][0]
+    except:
+        return ""
+
+
+# 验证是否是ip地址
+def is_ip(s: str):
+    import re
+
+    pattern = re.compile(
+        r"(([1-9]?\d|1\d\d|2[0-4]\d|25[0-5])\.){3}([1-9]?\d|1\d\d|2[0-4]\d|25[0-5])"
+    )
+    return pattern.fullmatch(s)
+
+
 if __name__ == "__main__":
     print(check_tcp_port({"host": "114.114.114.114", "port": "53"}))
