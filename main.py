@@ -35,9 +35,10 @@ def index():
                     "port": args.get("port", 80),
                 }
             else:
-                if is_ip(getIP(args.get("host"))):
+                _host = getIP(args.get("host"))
+                if is_ip(_host):
                     _c = {
-                        "host": getIP(args.get("host")),
+                        "host": _host,
                         "port": args.get("port", 80),
                     }
                 else:
