@@ -37,7 +37,7 @@ jobs:
           prerelease: false
       
       
-  study:
+  build:
     name: Build environment
     runs-on: ${{ matrix.os }}
     needs: release
