@@ -17,18 +17,25 @@ jobs:
     runs-on: ubuntu-latest
     outputs: 
       upload_url: ${{ steps.create_release.outputs.upload_url }}
+      date: ${{ steps.date.outputs.today }}
     
     steps:
+      
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=today::$(date +'%Y-%m-%d')"
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ env.Name }}_${{ github.run_id }}
-          release_name: ${{ env.Name }}_${{ github.run_id }}
+          tag_name: ${{ env.Name }}_${{ steps.date.outputs.today }}_${{ github.run_id }}
+          release_name: ${{ env.Name }}_${{ steps.date.outputs.today }}_${{ github.run_id }}
           draft: false
           prerelease: false
+      
       
   study:
     name: Build environment
