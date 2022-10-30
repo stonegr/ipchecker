@@ -50,6 +50,9 @@ def index():
 
 
 if __name__ == "__main__":
-    # 读取配置
-    c = get_config(args.config)
-    app.run(host=c["host"], port=c["port"])
+    if not args.config:
+        parser.print_help()
+    else:
+        # 读取配置
+        c = get_config(args.config)
+        app.run(host=c["host"], port=c["port"])
